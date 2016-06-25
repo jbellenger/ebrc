@@ -10,6 +10,11 @@ const scopes = ['https://www.googleapis.com/auth/calendar'];
 const calendarId = 'eastbayrowingclub.org_deokfeiv64l9014cml9ipugo2s@group.calendar.google.com';
 const teamsnapIcal = 'http://ical-cdn.teamsnap.com/team_schedule/80232eb0-ca4c-012f-9990-404094ca0527.ics';
 
+function log() {
+  const args = [new Date(), ':'].concat(Array.from(arguments));
+  console.log(args.join(' '));
+}
+
 const mkAuthClient = (subject, scopes) => new Promise((resolve, reject) => {
   gapi.auth.getApplicationDefault((err, authClient) => {
     if (err) {
@@ -59,7 +64,7 @@ const getGoogleEvents = (authClient) => {
 };
 
 const updateEvent = (authClient, eventId, resource) => new Promise((resolve, reject) => {
-  console.log('updating', eventId);
+  log('updating', eventId);
   const req = {
     auth: authClient,
     calendarId,
@@ -166,7 +171,7 @@ const isDow = (dateStr, dows) => {
 
 const sync = () => mkAuthClient(subject, scopes)
   .then((authClient) => {
-    console.log('syncing...');
+    log('syncing...', 'foo');
     return Promise.all([getTeamsnapEvents(), getGoogleEvents(authClient)])
       .then(([tevents, gevents]) => {
         const promises = [];
@@ -221,5 +226,4 @@ const syncLoop = (timeout) => {
   inner();
 };
 
-syncLoop(60000);
-// sync();
+module.exports = {sync, syncLoop};

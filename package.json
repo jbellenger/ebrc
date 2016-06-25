@@ -1,0 +1,35 @@
+{
+  "name": "ebrc",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "calsync": "node src/calsync"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbellenger/ebrc.git"
+  },
+  "author": "James Bellenger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbellenger/ebrc/issues"
+  },
+  "homepage": "https://github.com/jbellenger/ebrc#readme",
+  "dependencies": {
+    "google-auth-library": "^0.9.8",
+    "google-calendar": "^1.3.2",
+    "googleapis": "^9.0.0",
+    "ical": "^0.5.0",
+    "lodash": "^4.13.1",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
+    "teamsnap.js": "^1.14.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.9.0"
+  }
+}

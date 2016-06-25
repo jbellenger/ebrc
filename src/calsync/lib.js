@@ -171,7 +171,7 @@ const isDow = (dateStr, dows) => {
 
 const sync = () => mkAuthClient(subject, scopes)
   .then((authClient) => {
-    log('syncing...', 'foo');
+    log('syncing...');
     return Promise.all([getTeamsnapEvents(), getGoogleEvents(authClient)])
       .then(([tevents, gevents]) => {
         const promises = [];

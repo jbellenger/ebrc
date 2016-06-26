@@ -184,7 +184,6 @@ const sync = () => mkAuthClient(subject, scopes)
           )
         );
 
-
         // mon/wed/fri
         promises.push(
           updateInstances(authClient,
@@ -192,14 +191,6 @@ const sync = () => mkAuthClient(subject, scopes)
             tevents.filter((i) => isDow(i.start, [1, 3, 5]))
           )
         );
-
-        /*
-        const gsat = gevents.find((i) => isDow(i.start.dateTime, [6]));
-        if (!gsat) {
-          console.log('cannot find gsat');
-          console.log(JSON.stringify(gevents));
-        }
-        */
 
         // sat
         promises.push(

@@ -146,7 +146,20 @@ const updateInstances = (authClient, gevent, tevents) => {
       const promises = instances.items.map((inst) => {
         const start = Date.parse(inst.start.dateTime);
 
-        const tevent = tevents.find((te) => Date.parse(te.start) === start);
+        const tevent = tevents.find((te) => {
+          // dates parsed by the ical module are Date objects that have had a
+          // 'tz' property set on them.
+          // This makes the time zones very confusing, as they'll get
+          // toString'd to a form like
+          // { 2016-04-19T05:20:00.000Z tz: 'America/Los_Angeles' }
+          // This is obvious nonsense, as the 'Z' indicates a UTC time, but the
+          // 'tz' property indicates something else.
+          // Assume a Los_Angeles stamp and manually adjust the zone
+          // This will break with DST.
+          const teStamp = te.start - (-7 * 1000 * 60 * 60);
+          return teStamp === start;
+        });
+
         if (!tevent) {
           return;
         }
